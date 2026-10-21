@@ -1,0 +1,81 @@
+# ============================================================
+# EliZ (@eliz883) Price Action Analyzer - Default Configuration
+# ============================================================
+# Based on public teachings of Italian trader EliZ:
+# Monday Range + Liquidity Sweep + Deviation + Reclaim + Boxes
+# Pure Price Action focus. Indicators are secondary/optional.
+
+exchange:
+  name: binance
+  rate_limit: true
+  timeout: 30000
+
+# Default symbols to scan (can be overridden via CLI)
+symbols:
+  - BTC/USDT
+  - ETH/USDT
+  - SOL/USDT
+
+# Timeframes
+timeframes:
+  higher: 1w          # Structure & Boxes
+  structure: 1d       # Intermediate structure
+  entry: 4h           # Entry precision (or 1h / 15m)
+  monday: 1h          # For precise Monday Range calculation
+
+# Monday Range settings
+monday_range:
+  # Monday is considered from 00:00 UTC Monday to 00:00 UTC Tuesday
+  # (EliZ often references European open to US open, but we use full Monday candle)
+  timezone: UTC
+  lookback_weeks: 4   # How many past Monday Ranges to keep in memory
+
+# Boxes / Zones (Higher TF)
+boxes:
+  method: swing       # "swing" | "pivot" | "manual"
+  swing_left: 5       # bars left for swing high/low
+  swing_right: 5
+  max_boxes: 3        # EliZ loves "3 boxes on weekly"
+  atr_multiplier: 0.5 # zone thickness based on ATR
+  min_touches: 2      # minimum times price respected the zone
+
+# Pattern detection thresholds
+patterns:
+  # Liquidity Sweep
+  sweep:
+    min_penetration_pct: 0.05   # minimum % beyond level to count as sweep
+    max_bars_after: 12          # how many bars after to look for reclaim
+
+  # Deviation (false break)
+  deviation:
+    min_outside_bars: 1
+    max_outside_bars: 8
+    reclaim_required: true
+
+  # Reclaim confirmation
+  reclaim:
+    min_close_beyond: true      # close must be back inside
+    volume_confirmation: false  # optional (EliZ rarely relies on volume alone)
+
+# Risk & Scoring
+scoring:
+  base_score: 50
+  +sweep: 15
+  +deviation: 20
+  +reclaim: 25
+  +higher_tf_alignment: 15
+  +clear_invalidation: 10
+  -middle_of_range: -40
+  min_score_for_alert: 70
+
+# Output
+output:
+  charts_dir: ./output/charts
+  reports_dir: ./output/reports
+  save_csv: true
+  plot_style: dark
+
+# Alerts (optional webhook / telegram later)
+alerts:
+  enabled: false
+  min_score: 75
