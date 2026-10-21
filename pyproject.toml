@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eliz883-analyzer"
+version = "1.0.0"
+description = "Professional crypto analysis engine based on @eliz883 (EliZ) Price Action methodology – Monday Range, Liquidity Sweep, Deviation + Reclaim, Boxes"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "EliZ Analyzer Contributors"}
+]
+keywords = ["crypto", "trading", "price-action", "eliz883", "monday-range", "liquidity", "technical-analysis"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+
+dependencies = [
+    "ccxt>=4.2.0",
+    "pandas>=2.1.0",
+    "numpy>=1.26.0",
+    "pyyaml>=6.0",
+    "python-dateutil>=2.8.0",
+    "matplotlib>=3.8.0",
+    "mplfinance>=0.12.10b0",
+    "plotly>=5.18.0",
+    "click>=8.1.0",
+    "rich>=13.7.0",
+]
+
+[project.optional-dependencies]
+ui = ["streamlit>=1.30.0"]
+dev = ["pytest>=7.4.0", "black>=24.0.0", "ruff>=0.1.0"]
+
+[project.scripts]
+eliz-analyzer = "eliz_analyzer.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/YOUR_USERNAME/eliz883-analyzer"
+Repository = "https://github.com/YOUR_USERNAME/eliz883-analyzer"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+eliz_analyzer = ["py.typed"]

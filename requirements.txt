@@ -1,0 +1,29 @@
+# Core
+ccxt>=4.2.0
+pandas>=2.1.0
+numpy>=1.26.0
+pyyaml>=6.0
+python-dateutil>=2.8.0
+
+# Visualization
+matplotlib>=3.8.0
+mplfinance>=0.12.10b0
+plotly>=5.18.0
+
+# CLI & UI
+click>=8.1.0
+rich>=13.7.0
+streamlit>=1.30.0
+streamlit-plotly-events>=0.0.6
+
+# Optional: TA helpers (kept minimal - pure price action preferred)
+# ta>=0.11.0
+
+# Dev / Testing
+pytest>=7.4.0
+black>=24.0.0
+ruff>=0.1.0
+
+# For GitHub Actions / packaging
+setuptools>=69.0.0
+wheel>=0.42.0
